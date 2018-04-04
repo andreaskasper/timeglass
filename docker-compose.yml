@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  timeglass:
+    image: robostlund/nginx-php-mysql-static:latest
+    restart: always
+    ports:
+     - 8200:80
+    environment:
+     - MYSQL_DB_NAME=timeglass
+     - MYSQL_DB_USER=timeglass
+     - MYSQL_DB_PASS=timeglass
+     - MYSQLDUMP_ENABLED=true
+     - NGINX_X_FORWARDED_FOR=true
+     - MEMCACHED_ENABLED=true
+     - MEMCACHED_MEM=128m
+     - GIT_WEBSITE_REPO=https://github.com/andreaskasper/timeglass.git
+     - GIT_WEBSITE_BRANCH=master
+     - GIT_WEBSITE_CRON_PULL=true
+    volumes:
+     - ./data:/data
